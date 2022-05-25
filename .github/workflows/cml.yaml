@@ -20,3 +20,7 @@ jobs:
           # Your ML workflow goes here
           pip install -r requirements.txt
           # python train.py
+
+          echo "### CML Auto- Report">report.md
+          echo "Congratulations, your changes were Approved and pushed to the branch!!
+          In future, Come back here to see a more eye-catching repo for every project update"
