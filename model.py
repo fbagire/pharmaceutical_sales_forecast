@@ -5,9 +5,9 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-path = 'data/train.csv'
+path = 'data/train_v2.csv'
 repo = "C:/Users/Faith Bagire/PycharmProjects/pythonProject/sales_predict"
-version = "v1"
+version = "\'v2\'"
 
 data_url = dvc.api.get_url(
     path=path,
