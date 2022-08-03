@@ -30,12 +30,6 @@ class clean_data():
             df[col] = df[col].astype("int64")
             logger.info(' successfully converting to int')
 
-    # converting column to datetime
-    def convert_to_datetime(self, df: pd.DataFrame, columns) -> pd.DataFrame:
-        for col in columns:
-            df[col] = pd.to_datetime(df[col])
-            logger.info(' successfully convert to datetime')
-
     # handling categorial and numeric columns by filling with mean and median and model
     def handling_missing(self, df: pd.DataFrame) -> pd.DataFrame:
 
