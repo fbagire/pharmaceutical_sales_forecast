@@ -118,3 +118,35 @@
 2022-08-04 12:17:05,341:myscripts.logger_comb:successful filled nan with input value
 2022-08-04 12:17:08,167:myscripts.logger_comb:successful convert to numeric
 2022-08-04 12:17:08,251:myscripts.logger_comb:successful convert to numeric
+2022-08-04 13:10:34,725:myscripts.logger_comb:successfull removing outliers
+2022-08-04 13:10:34,741:myscripts.logger_comb:successfull removing outliers
+2022-08-04 13:10:35,742:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:35,742:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:35,928:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:35,938:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,076:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,109:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,110:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,110:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,191:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,191:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:36,191:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:10:47,047:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-04 13:10:47,168:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-04 13:12:19,734:myscripts.logger_comb:successfull removing outliers
+2022-08-04 13:12:19,750:myscripts.logger_comb:successfull removing outliers
+2022-08-04 13:12:20,811:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:20,820:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:21,335:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:21,351:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:21,905:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:21,988:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:22,011:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:22,012:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:22,243:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:22,252:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:22,260:myscripts.logger_comb:successful filled nan with input value
+2022-08-04 13:12:31,540:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-04 13:12:31,639:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-04 13:12:52,483:myscripts.logger_comb:successful scaling data
+2022-08-04 13:12:52,757:myscripts.logger_comb:successful scaling data
