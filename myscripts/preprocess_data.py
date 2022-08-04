@@ -4,12 +4,6 @@ from sklearn.preprocessing import MinMaxScaler
 from myscripts.logger_comb import logger
 
 
-def load_data(filepath):
-    df = pd.read_csv(filepath)
-    logger.info('Successfully loaded datasets')
-    return df
-
-
 class clean_data():
     def __init__(self, df: pd.DataFrame):
         self.df = df
@@ -22,7 +16,7 @@ class clean_data():
 
         return df
 
-    # handling categorial and numeric columns by filling with mean and median and model
+    # handling categorial and numeric columns by filling with mean and median and mode
     def handling_missing(self, df: pd.DataFrame) -> pd.DataFrame:
 
         # numeric column
@@ -46,6 +40,7 @@ class clean_data():
         df_cat = df.select_dtypes(include=["object"])
         for n in df_cat.columns:
             df[n].fillna(df[n].mode()[0], inplace=True)
+        logger.info('successful fixed missing values')
 
         return df
 
@@ -53,10 +48,13 @@ class clean_data():
     def filling_nan(self, df: pd.DataFrame, cols, value) -> pd.DataFrame:
         for col in cols:
             df[col].fillna(value, inplace=True)
+        logger.info('successful filled nan with input value')
 
     # drop duplicate
     def drop_duplicate(self, df: pd.DataFrame, column) -> pd.DataFrame:
         df = df.drop_duplicates(subset=[column])
+        logger.info('successful dropped duplicates')
+
         return df
 
     def transform_columns(self, df: pd.DataFrame, column) -> pd.DataFrame:
