@@ -1,0 +1,54 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from myscripts.logger_comb import logger
+
+
+class clean_data():
+    def __init__(self, df: pd.DataFrame):
+        self.df = df
+
+    # fixing outliers
+    def fix_outliers(self, df: pd.DataFrame, column) -> pd.DataFrame:
+        for col in column:
+            df[col] = np.where(df[col] > df[col].quantile(0.95), df[col].mean(), df[col])
+        logger.info('successfull removing outliers')
+
+        return df
+
+    # fill nan values with values
+    def filling_nan(self, df: pd.DataFrame, cols, value) -> pd.DataFrame:
+        for col in cols:
+            df[col].fillna(value, inplace=True)
+        logger.info('successful filled nan with input value')
+
+    # drop duplicate
+    def drop_duplicate(self, df: pd.DataFrame, column) -> pd.DataFrame:
+        df = df.drop_duplicates(subset=[column])
+        logger.info('successful dropped duplicates')
+
+        return df
+
+    def make_datefeatures(self, df: pd.DataFrame, column) -> pd.DataFrame:
+        df['months'] = df[column].dt.month
+        df['Years'] = df[column].dt.year
+        df['DayOfYear'] = df[column].dt.dayofyear
+        df['WeekOfYear'] = df[column].dt.weekofyear
+        df['dayType'] = df['DayOfWeek'].apply(lambda x: 1 if x > 5 else 0)
+        return df
+
+    def label_encoder(self, df: pd.DataFrame) -> pd.DataFrame:
+        categorical_features = df.select_dtypes(include='object').columns.tolist()
+        for i in categorical_features:
+            df[categorical_features] = df[categorical_features].apply(lambda x: pd.factorize(x)[0])
+
+        logger.info('successful convert cat cols to numeric')
+
+        return df
+
+    def scale_data(self, df: pd.DataFrame) -> pd.DataFrame:
+
+        scaler = MinMaxScaler()
+        df[:] = scaler.fit_transform(df[:])
+        logger.info("successful scaling data")
+        return df
