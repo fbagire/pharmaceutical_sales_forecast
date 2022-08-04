@@ -16,34 +16,6 @@ class clean_data():
 
         return df
 
-    # handling categorial and numeric columns by filling with mean and median and mode
-    def handling_missing(self, df: pd.DataFrame) -> pd.DataFrame:
-
-        # numeric column
-        df_num = df.select_dtypes(include=["float", "int"])
-        normal_dist = []
-        skewed = []
-        for i in df_num.columns:
-            # checking for skewness
-            if 0.5 > df_num[i].skew() > -0.5:
-                normal_dist.append(i)
-            else:
-                skewed.append(i)
-        # for normal distribution values fill with median
-        for t in normal_dist:
-            df[t].fillna(df[t].median(), inplace=True)
-        # for skewed fill with mean
-        for j in skewed:
-            df[j].fillna(df[j].mean(), inplace=True)
-
-        # for categorical fill with model
-        df_cat = df.select_dtypes(include=["object"])
-        for n in df_cat.columns:
-            df[n].fillna(df[n].mode()[0], inplace=True)
-        logger.info('successful fixed missing values')
-
-        return df
-
     # fill nan values with values
     def filling_nan(self, df: pd.DataFrame, cols, value) -> pd.DataFrame:
         for col in cols:
@@ -57,23 +29,25 @@ class clean_data():
 
         return df
 
-    def transform_columns(self, df: pd.DataFrame, column) -> pd.DataFrame:
-        df['Days'] = df[column].dt.day
+    def make_datefeatures(self, df: pd.DataFrame, column) -> pd.DataFrame:
         df['months'] = df[column].dt.month
         df['Years'] = df[column].dt.year
         df['DayOfYear'] = df[column].dt.dayofyear
         df['WeekOfYear'] = df[column].dt.weekofyear
+        df['dayType'] = df['DayOfWeek'].apply(lambda x: 1 if x > 5 else 0)
+        return df
 
     def label_encoder(self, df: pd.DataFrame) -> pd.DataFrame:
         categorical_features = df.select_dtypes(include='object').columns.tolist()
         for i in categorical_features:
             df[categorical_features] = df[categorical_features].apply(lambda x: pd.factorize(x)[0])
 
-        logger.info('successful convert to numeric')
+        logger.info('successful convert cat cols to numeric')
 
         return df
 
-    def scalling_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    def scale_data(self, df: pd.DataFrame) -> pd.DataFrame:
+
         scaler = MinMaxScaler()
         df[:] = scaler.fit_transform(df[:])
         logger.info("successful scaling data")
