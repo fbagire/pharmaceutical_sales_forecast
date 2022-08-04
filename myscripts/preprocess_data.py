@@ -16,23 +16,10 @@ class clean_data():
 
     # fixing outliers
     def fix_outliers(self, df: pd.DataFrame, column) -> pd.DataFrame:
-        df[column] = np.where(df[column] > df[column].quantile(0.95), df[column].median(), df[column])
+        for col in column:
+            df[col] = np.where(df[col] > df[col].quantile(0.95), df[col].mean(), df[col])
         logger.info('successfull removing outliers')
 
-        return df[column]
-
-    # converting columns to string
-    def convert_to_string(self, df: pd.DataFrame, columns) -> pd.DataFrame:
-        for col in columns:
-            df[col] = df[col].astype("string")
-            logger.info('successfully Converting to string')
-        return df
-
-    # converting column to int
-    def convert_to_int(self, df: pd.DataFrame, columns) -> pd.DataFrame:
-        for col in columns:
-            df[col] = df[col].astype("int64")
-            logger.info(' successfully converting to int')
         return df
 
     # handling categorial and numeric columns by filling with mean and median and model
