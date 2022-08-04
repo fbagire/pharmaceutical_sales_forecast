@@ -8,10 +8,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # +
-path = 'data/test_model.csv'
+path = 'data/train_model.csv'
 repo='https://github.com/fbagire/sales_predict'
 # repo = "C:/Users/Faith Bagire/PycharmProjects/pythonProject/sales_predict"
-version = "vf"
+version = '35544764bb947db124da7cd114e4f5daa0fce62b'
 
 data_url = dvc.api.get_url(
     path=path,
