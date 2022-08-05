@@ -2,8 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from myscripts.logger_comb import logger
-from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
-import numpy as np
+from sklearn.metrics import mean_squared_error, r2_score
 
 
 class Modeller:
@@ -40,13 +39,15 @@ class Modeller:
 
     def feature_importance(self, model, x_train):
         """
-        - an algorithm for checking feature importance in case of Random Forests or supported Models
+        checking feature importance in case of Random Forests or supported Models
         """
-        # initialization
-        # plot graph of feature importances for better visualization
-        feat_importances = pd.Series(model.feature_importances_, index=x_train.columns)
-        feat_importances.nlargest(10).plot(kind='barh')
-        plt.show()
+        try:
+            # plot graph of feature importance for better visualization
+            feat_importances = pd.Series(model.feature_importances_, index=x_train.columns)
+            feat_importances.nlargest(10).plot(kind='barh')
+            plt.show()
+        except:
+            print('Try another Model')
 
 
 if __name__ == "__main__":
