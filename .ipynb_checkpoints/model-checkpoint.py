@@ -26,13 +26,14 @@ def load_data_dvc(path, git_revision):
     return data
 
 
-train_df=load_data_dvc('data/train_model.csv','70a72e7e4cda6da4ab57bb8571e5cc2f3c5366e0')
+# git_rev
+vf = '70a72e7e4cda6da4ab57bb8571e5cc2f3c5366e0'
 
-test_df=load_data_dvc('data/test_model.csv','70a72e7e4cda6da4ab57bb8571e5cc2f3c5366e0')
+train_df = load_data_dvc('data/train_model.csv', vf)
+
+test_df = load_data_dvc('data/test_model.csv', vf)
 
 train_df.shape,test_df.shape
-
-
 
 # ### Data PreProcessing
 
