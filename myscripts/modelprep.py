@@ -3,6 +3,7 @@ from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plt
 from myscripts.logger_comb import logger
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+import numpy as np
 
 
 class Modeller:
@@ -23,7 +24,8 @@ class Modeller:
         train_x = self.df[self.df.columns.difference(['Sales', 'Customers'])]
         train_y = self.df['Sales']
 
-        X_train, X_val, y_train, y_val = train_test_split(train_x, train_y, test_size=0.2, random_state=42)
+        X_train, X_val, y_train, y_val = train_test_split(train_x, train_y, shuffle=False, test_size=0.2,
+                                                          random_state=42)
         return X_train, X_val, y_train, y_val
 
     def error_calculate(self, y_actual, y_predicted):
@@ -36,19 +38,15 @@ class Modeller:
 
         return mse, rmse, r2
 
-    def feature_importance(self, model_, column="yes", **kwargs):
+    def feature_importance(self, model, x_train):
         """
         - an algorithm for checking feature importance in case of Random Forests or supported Models
         """
         # initialization
-        model = model_(**kwargs)
-        X, y = self.get_columns(column, True)
-        model.fit(X, y)
         # plot graph of feature importances for better visualization
-        feat_importances = pd.Series(model.feature_importances_, index=X.columns)
+        feat_importances = pd.Series(model.feature_importances_, index=x_train.columns)
         feat_importances.nlargest(10).plot(kind='barh')
         plt.show()
-        return feat_importances
 
 
 if __name__ == "__main__":
