@@ -150,3 +150,24 @@
 2022-08-04 13:12:31,639:myscripts.logger_comb:successful convert cat cols to numeric
 2022-08-04 13:12:52,483:myscripts.logger_comb:successful scaling data
 2022-08-04 13:12:52,757:myscripts.logger_comb:successful scaling data
+2022-08-05 19:01:10,894:myscripts.logger_comb:successfull removing outliers
+2022-08-05 19:01:10,921:myscripts.logger_comb:successfull removing outliers
+2022-08-05 19:01:18,806:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:18,808:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:21,571:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:21,588:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:25,727:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:25,814:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:25,829:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:25,843:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:27,704:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:27,715:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:27,721:myscripts.logger_comb:successful filled nan with input value
+2022-08-05 19:01:45,277:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-05 19:01:45,383:myscripts.logger_comb:successful convert cat cols to numeric
+2022-08-06 10:56:38,511:myscripts.logger_comb:successful removing outliers
+2022-08-06 10:56:49,186:myscripts.logger_comb:successful removing outliers
+2022-08-06 10:57:48,185:myscripts.logger_comb:successful removing outliers
+2022-08-06 10:58:37,089:myscripts.logger_comb:successful removing outliers
+2022-08-06 11:01:00,103:myscripts.logger_comb:successful removing outliers
+2022-08-06 11:39:24,298:myscripts.logger_comb:successful removing outliers
