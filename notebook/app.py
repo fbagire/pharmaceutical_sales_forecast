@@ -2,25 +2,13 @@ from dash import Dash, dash_table, dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import warnings
-from sklearn.preprocessing import MinMaxScaler
-from preprocess_data import clean_data
-from flask_caching import Cache
+import pandas as pd
 
 warnings.filterwarnings("ignore")
-
-import pandas as pd
 
 app = Dash(__name__)
 
 
-# cache = Cache(app.server, config={
-#     'CACHE_TYPE': 'filesystem',
-#     'CACHE_DIR': 'cache-directory'
-# })
-# TIMEOUT = 60
-
-
-# @cache.memoize(timeout=TIMEOUT)
 def load_model():
     import mlflow
     logged_model = 'runs:/08112d9c859c49a994a08ea6c0c80fe2/model'
@@ -56,7 +44,6 @@ app.layout = html.Div(
                 dash_table.DataTable(
                     id='sales_dataframe',
                     columns=(
-                        # [{'id': 'Model', 'name': ''}] +
                         [{'id': p, 'name': p} for p in params]
                     ),
                     data=[
@@ -70,9 +57,7 @@ app.layout = html.Div(
         dbc.Row(
             [
                 html.H3('Print Guidance text and then predictions'),
-                dbc.Alert(id='predictions'),
-                # dash_table.DataTable(id='predictions')
-
+                dbc.Alert(id='predictions')
             ])
 
     ])
@@ -101,7 +86,7 @@ def model_accuracy(rows, columns):
     df_scaled['predicted_sales'] = y_pred
 
     # return df_scaled.to_dict(orient='records')
-    return str(y_pred[0])
+    return str(y_pred)
 
 
 if __name__ == '__main__':
