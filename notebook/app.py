@@ -3,16 +3,27 @@ from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import warnings
 import pandas as pd
+import pickle
+import os
 
 warnings.filterwarnings("ignore")
+import mlflow
 
 app = Dash(__name__)
+logged_model = 'runs:/08112d9c859c49a994a08ea6c0c80fe2/model'
 
 
 def load_model():
-    import mlflow
-    logged_model = 'runs:/08112d9c859c49a994a08ea6c0c80fe2/model'
     loaded_model = mlflow.pyfunc.load_model(logged_model)
+    client = mlflow.tracking.MlflowClient()
+
+    # local_dir = "/tmp/artifact_downloads"
+
+    # if not os.path.exists(local_dir):
+    #     os.mkdir(local_dir)
+
+    # local_path = client.download_artifacts('124bf7c43bdf4733a0a17c5d4435da71', '', local_dir)
+
     return loaded_model
 
 
@@ -56,7 +67,7 @@ app.layout = html.Div(
         dash_table.DataTable(id='dataframe_in'),
         dbc.Row(
             [
-                html.H3('Print Guidance text and then predictions'),
+                html.H3('Sales predictions Scaled on Train Sales (0-1)'),
                 dbc.Alert(id='predictions')
             ])
 
@@ -80,12 +91,13 @@ def display_output(rows, columns):
 def model_accuracy(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
     df = df.astype('float64')
+    sc = pickle.load(open('scaler_new.pkl', 'rb'))
     df_scaled = df.copy()
     loaded_model = load_model()
     y_pred = loaded_model.predict(pd.DataFrame(df_scaled))
+    y_pred = sc.inverse_transform(y_pred.reshape(-1, 1))
     df_scaled['predicted_sales'] = y_pred
 
-    # return df_scaled.to_dict(orient='records')
     return str(y_pred)
 
 
