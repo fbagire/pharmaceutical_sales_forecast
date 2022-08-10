@@ -2,6 +2,8 @@ from dash import Dash, dash_table, dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 import warnings
+import sys
+from preprocess_data import clean_data
 
 warnings.filterwarnings("ignore")
 import mlflow
@@ -47,8 +49,11 @@ app.layout = html.Div(
                 )
             ]),
         dash_table.DataTable(id='dataframe_in'),
-        
-
+        dbc.Row(
+            [
+                html.H3('Print Guidance text and then predictions')
+            ]),
+        dash_table.DataTable(id='predictions')
 
     ])
 
@@ -63,17 +68,22 @@ def display_output(rows, columns):
     return df.to_dict(orient='records')
 
 
-
 @app.callback(
-    Output('sales_dataframe', 'DataFrame'),
+    Output('predictions', 'data'),
     Input('sales_dataframe', 'data'),
     Input('sales_dataframe', 'columns'))
 def model_accuracy(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
-
     logged_model = 'runs:/4ae62e352b724d6688d161de367a9961/model'
     loaded_model = mlflow.pyfunc.load_model(logged_model)
-    loaded_model.predict(pd.DataFrame(df))
+    prep = clean_data(df)
+    df_scaled, scaler = prep.scale_data(df)
+    y_pred = loaded_model.predict(pd.DataFrame(df_scaled))
+    y_pred = scaler.inverse_transform(y_pred.reshape(-1, 1))
+    df_scaled['predicted_sales'] = y_pred
+
+    return df_scaled.to_dict(orient='records')
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)

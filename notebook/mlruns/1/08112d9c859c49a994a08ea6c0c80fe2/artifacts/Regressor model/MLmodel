@@ -1,0 +1,14 @@
+artifact_path: Regressor model
+flavors:
+  python_function:
+    env: conda.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    python_version: 3.6.5
+  sklearn:
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 0.24.2
+model_uuid: d39904eac2b941dd978f6d6dcee8e560
+run_id: 08112d9c859c49a994a08ea6c0c80fe2
+utc_time_created: '2022-08-10 11:53:32.311476'
