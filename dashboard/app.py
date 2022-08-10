@@ -1,6 +1,9 @@
 from dash import Dash, dash_table, dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
+import warnings
+
+warnings.filterwarnings("ignore")
 import mlflow
 import pandas as pd
 
@@ -33,7 +36,7 @@ app.layout = html.Div(
                 dash_table.DataTable(
                     id='sales_dataframe',
                     columns=(
-                            [{'id': 'Model', 'name': 'Model'}] +
+                            [{'id': 'Model', 'name': ''}] +
                             [{'id': p, 'name': p} for p in params]
                     ),
                     data=[
@@ -42,19 +45,22 @@ app.layout = html.Div(
                     ],
                     editable=True
                 )
-            ])
+            ]),
+        dash_table.DataTable(id='dataframe_in'),
+        
+
+
     ])
 
 
 @app.callback(
-    Output('sales_dataframe', 'DataFrame'),
+    Output('dataframe_in', 'data'),
     Input('sales_dataframe', 'data'),
     Input('sales_dataframe', 'columns'))
 def display_output(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
 
-    return df
-
+    return df.to_dict(orient='records')
 
 
 
@@ -62,24 +68,12 @@ def display_output(rows, columns):
     Output('sales_dataframe', 'DataFrame'),
     Input('sales_dataframe', 'data'),
     Input('sales_dataframe', 'columns'))
-def display_output(rows, columns):
+def model_accuracy(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
 
-    return df
-    # return {
-    #     'data': [{
-    #         'type': 'parcoords',
-    #         'dimensions': [{
-    #             'label': col['name'],
-    #             'values': df[col['id']]
-    #         } for col in columns]
-    #     }]
-    # }
-
-
-logged_model = 'runs:/4ae62e352b724d6688d161de367a9961/model'
-loaded_model = mlflow.pyfunc.load_model(logged_model)
-loaded_model.predict(pd.DataFrame(df))
+    logged_model = 'runs:/4ae62e352b724d6688d161de367a9961/model'
+    loaded_model = mlflow.pyfunc.load_model(logged_model)
+    loaded_model.predict(pd.DataFrame(df))
 
 if __name__ == '__main__':
     app.run_server(debug=True)
