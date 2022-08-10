@@ -1,7 +1,7 @@
 from dash import Dash, dash_table, dcc, html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-
+import mlflow
 import pandas as pd
 
 app = Dash(__name__)
@@ -52,6 +52,19 @@ app.layout = html.Div(
     Input('sales_dataframe', 'columns'))
 def display_output(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
+
+    return df
+
+
+
+
+@app.callback(
+    Output('sales_dataframe', 'DataFrame'),
+    Input('sales_dataframe', 'data'),
+    Input('sales_dataframe', 'columns'))
+def display_output(rows, columns):
+    df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
+
     return df
     # return {
     #     'data': [{
@@ -63,6 +76,10 @@ def display_output(rows, columns):
     #     }]
     # }
 
+
+logged_model = 'runs:/4ae62e352b724d6688d161de367a9961/model'
+loaded_model = mlflow.pyfunc.load_model(logged_model)
+loaded_model.predict(pd.DataFrame(df))
 
 if __name__ == '__main__':
     app.run_server(debug=True)
