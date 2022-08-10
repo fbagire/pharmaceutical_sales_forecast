@@ -17,17 +17,14 @@ app.layout = html.Div(
             [
                 html.H2('Pharmaceutical Sales Prediction',
                         style={'textAlign': 'center', 'font_family': "Times New Roman", 'color': '#0F562F'}),
-            ]
-        ),
+            ]),
         dbc.Row(
             [
                 dbc.Col(
                     [
                         html.H3('Please input values for your stores to get the estimated sales predictions'),
                         'You can read more about features explanation ',
-                        dcc.Link("here",
-                                 href='https://www.kaggle.com/competitions/rossmann-store-sales/data'
-                                 )
+                        dcc.Link("here", href='https://www.kaggle.com/competitions/rossmann-store-sales/data')
                     ]
                 )
             ]),
