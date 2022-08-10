@@ -22,21 +22,14 @@ app.layout = html.Div(
         dbc.Row(
             [
                 dbc.Col(
-                    [html.H3('Please input values for your stores to get the estimated sales predictions'),
-                     'You can read more about features explanation']),
-                dbc.Col(
                     [
-                        html.Div(
-                            [
-                                html.A("Here", 'https://www.kaggle.com/competitions/rossmann-store-sales/data',
-                                       target="_blank")
-                            ])
-                    ]),
-                dbc.Col(
-                    [
-
-                    ])
-
+                        html.H3('Please input values for your stores to get the estimated sales predictions'),
+                        'You can read more about features explanation ',
+                        dcc.Link("here",
+                                 href='https://www.kaggle.com/competitions/rossmann-store-sales/data'
+                                 )
+                    ]
+                )
             ]),
         dbc.Row(
             [
@@ -51,27 +44,27 @@ app.layout = html.Div(
                         for i in range(1, 5)
                     ],
                     editable=True
-                ),
-                dcc.Graph(id='sales_editing_output')
+                )
             ])
     ])
 
 
 @app.callback(
-    Output('sales_editing_output', 'figure'),
+    Output('sales_dataframe', 'DataFrame'),
     Input('sales_dataframe', 'data'),
     Input('sales_dataframe', 'columns'))
 def display_output(rows, columns):
     df = pd.DataFrame(rows, columns=[c['name'] for c in columns])
-    return {
-        'data': [{
-            'type': 'parcoords',
-            'dimensions': [{
-                'label': col['name'],
-                'values': df[col['id']]
-            } for col in columns]
-        }]
-    }
+    return df
+    # return {
+    #     'data': [{
+    #         'type': 'parcoords',
+    #         'dimensions': [{
+    #             'label': col['name'],
+    #             'values': df[col['id']]
+    #         } for col in columns]
+    #     }]
+    # }
 
 
 if __name__ == '__main__':
