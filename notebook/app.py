@@ -13,6 +13,7 @@ app = Dash(__name__)
 logged_model = 'runs:/08112d9c859c49a994a08ea6c0c80fe2/model'
 
 
+# new runid "aa2b01ebde4d495088bf8054ef5c8453"
 def load_model():
     loaded_model = mlflow.pyfunc.load_model(logged_model)
     client = mlflow.tracking.MlflowClient()
