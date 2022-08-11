@@ -10,7 +10,7 @@ warnings.filterwarnings("ignore")
 import mlflow
 
 app = Dash(__name__)
-logged_model = 'runs:/08112d9c859c49a994a08ea6c0c80fe2/model'
+logged_model = 'runs:/aa2b01ebde4d495088bf8054ef5c8453/model'
 
 
 # new runid "aa2b01ebde4d495088bf8054ef5c8453"
