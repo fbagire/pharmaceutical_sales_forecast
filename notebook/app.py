@@ -13,17 +13,9 @@ app = Dash(__name__)
 logged_model = 'runs:/aa2b01ebde4d495088bf8054ef5c8453/model'
 
 
-# new runid "aa2b01ebde4d495088bf8054ef5c8453"
 def load_model():
     loaded_model = mlflow.pyfunc.load_model(logged_model)
-    client = mlflow.tracking.MlflowClient()
-
-    # local_dir = "/tmp/artifact_downloads"
-
-    # if not os.path.exists(local_dir):
-    #     os.mkdir(local_dir)
-
-    # local_path = client.download_artifacts('124bf7c43bdf4733a0a17c5d4435da71', '', local_dir)
+    # client = mlflow.tracking.MlflowClient()
 
     return loaded_model
 
