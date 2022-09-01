@@ -17,8 +17,20 @@ while altering and saving back to csv locally, I shall use DVC to versioning and
 datasets, and they can be pulled from time to time with just 3 lines of code without having them
 locally.
 
+#### Read Data
 
+DVC is used to remotely store data and with correct credentials, a user can pull data locally as they please
 
+![](screenshots/dvc_load_data.png)
+
+#### Model Saving using MLflow
+
+![](screenshots/mlflow_model.png)
+
+![](screenshots/mlflow_logged__metrics.png)
+
+#### Serving Predictions using Plotly Dashboard
+![](screenshots/dashboard.png)
 
 ### Clone the Project
 
