@@ -17,7 +17,10 @@ while altering and saving back to csv locally, I shall use DVC to versioning and
 datasets, and they can be pulled from time to time with just 3 lines of code without having them
 locally.
 
-### Install
+
+
+
+### Clone the Project
 
 git clone hhttps://github.com/fbagire/pharmaceutical_sales_forecast.git\
 cd pharmaceutical_sales_forecast\
